@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Youth Palace</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+    <div class="page-header">
+        <h1><a href="/">Youth Palace</a></h1>
+        <a href="{% url 'youthpalace:student_list' %}" class ="top_menu">Students</a>
+        <a href="{% url 'youthpalace:teacher_list' %}" class ="top_menu">Teachers</a>
+        <a href="{% url 'youthpalace:course_list' %}" class ="top_menu">Courses</a>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'youthpalace/base.html' %}
+<script>
+
+</script>
+{% block content %}
+    <div class="student">
+        <h1>{{ student.name }}</h1>
+        <a class="btn btn-default" href="{% url 'student_edit' pk=student.pk %}">Edit Profile<span class="glyphicon glyphicon-pencil"></span></a> 
+    </div>
+    <hr>
+    <p> Courses 
+    <a class="btn btn-default" href="{% url 'student_add_course' pk=student.pk %}">Add Course<span class="glyphicon glyphicon-plus"></span></a> 
+
+
+    </p>
+    <table style="width:100%">
+    <tr>
+    <th>Class Name</th>
+    <th>Tuition</th> 
+    <th>Delete? </th>
+    </tr>
+    {% for course in student.course.all %}
+        <tr>
+            <td>{{ course.course.name }}</td>
+            <td>{{ course.course.cost }}</td>
+            <td><a class="btn btn-default" href="{% url 'student_drop_course' pk=course.pk %}"><span class="glyphicon glyphicon-remove"> </span></a> </td>
+        </tr>
+    {% empty %}
+        <p>No courses added yet </p>
+    {% endfor %}
+    </table>
+    <hr>
+    <p> Payment History </p>
+    <a class="btn btn-default" href="{% url 'payment_new' pk=student.pk %}"><span class= "glyphicon glyphicon-plus"></span></a></p>
+    <br>
+    <table style="width:100%">
+    <tr>
+    <th>Amount</th>
+    <th>Note</th> 
+    <th>Time</th>
+    <th>Recorder</th>
+    </tr>
+    {% for payment in student.payments.all %}
+    <tr>
+    <td> {{payment.amount}} </td>
+    <td> {{payment.note }}</td>
+    <td> {{payment.date}} </td>
+    <td> {{payment.recorder}}</td>
+    {% empty %}
+        <p>No Payment yet </p>
+    {% endfor %}
+    </tr>
+    </table>
+{% endblock %}

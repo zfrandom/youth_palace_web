@@ -1,0 +1,13 @@
+{% extends 'youthpalace/base.html' %}
+
+{% block content %}
+{% if user.is_staff %}
+ <a href="{% url 'course_new' %}" class ="top_menu"><span class= "glyphicon glyphicon-plus"></span></a>
+{% endif %}
+{% for course in courses %}
+	 <div class="course">
+        <h3><a href="{% url 'course_detail' pk=course.pk %}">{{ course.name }}</a></h1>
+        <hr>
+    </div>
+{% endfor %}
+{% endblock %}

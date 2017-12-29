@@ -1,0 +1,33 @@
+{% extends 'youthpalace/base.html' %}
+
+{% block content %}
+    <div class="course">
+        <h1>{{ course.name }}</h1>
+        {% if user.is_staff %}
+        <a class="btn btn-default" href="{% url 'course_edit' pk=course.pk %}">Edit Course<span class="glyphicon glyphicon-pencil"></span></a> 
+        {% endif %}
+    </div>
+    Tuition: {{course.cost}} yuan
+    <hr>
+    <p> Teacher </p>
+    <strong>{{course.teacher.name}}</strong>
+
+    <hr>
+    <p> Students </p>
+    Total: {{ course.student.all.count}}
+    <br> 
+    <table style="width:100%">
+    <tr>
+    <th>Student ID</th>
+    <th>Student Name</th> 
+    </tr>
+    {% for student in course.student.all %}
+    <tr>
+    <td> {{student.student.pk}} </td>
+    <td> {{student.student.name }}</td>
+    {% empty %}
+        <p>No Student yet </p>
+    {% endfor %}
+    </tr>
+    </table>
+{% endblock %}
