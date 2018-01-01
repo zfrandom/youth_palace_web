@@ -1,13 +1,29 @@
 {% extends 'youthpalace/base.html' %}
 
 {% block content %}
+<script type="text/javascript">
+    function deleteAlert(b){
+        console.log(b);
+        if(b=="True"){
+            confirm("The course is active now. Do you really want to delete it? The students' record will also be deleted.");
+        }
+        return;
+    };
+</script>
     <div class="course">
         <h1>{{ course.name }}</h1>
         {% if user.is_staff %}
-        <a class="btn btn-default" href="{% url 'course_edit' pk=course.pk %}">Edit Course<span class="glyphicon glyphicon-pencil"></span></a> 
+        <a class="btn btn-primary" href="{% url 'course_edit' pk=course.pk %}">Edit Course &nbsp;<span class="glyphicon glyphicon-pencil"></span></a> 
+        <a class="btn btn-danger" style= "margin-bottom:10px" href="{% url 'course_delete' pk=course.pk %}"><span class="glyphicon glyphicon-remove"> </span></a>
         {% endif %}
     </div>
-    Tuition: {{course.cost}} yuan
+    <h3>正在进行：{{course.active}}</h3>
+    <p>学期：{{course.term}} &nbsp; &nbsp; 
+        开课时间: {{course.start_date.year}}.{{course.start_date.month}} - {{course.end_date.year}}.{{course.end_date.month}}&nbsp; &nbsp; 时长：{{course.course_length}}分钟/节课
+         </p>
+    书本费: {{course.book_cost}} 元
+    学费: {{course.teaching_cost}} 元
+    总共费用: {{course.cost}} 元
     <hr>
     <p> Teacher </p>
     <strong>{{course.teacher.name}}</strong>

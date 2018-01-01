@@ -2,11 +2,16 @@
 
 {% block content %}
 {% if user.is_staff %}
- <a href="{% url 'course_new' %}" class ="top_menu"><span class= "glyphicon glyphicon-plus"></span></a>
+ <a href="{% url 'course_new' %}" class ="top_menu">添加课程&nbsp;<span class= "glyphicon glyphicon-plus"></span></a>
 {% endif %}
+
 {% for course in courses %}
 	 <div class="course">
-        <h3><a href="{% url 'course_detail' pk=course.pk %}">{{ course.name }}</a></h1>
+        <h3><a href="{% url 'course_detail' pk=course.pk %}">{{ course.name }}</a></h3>
+        <h4>学期：{{course.term}} &nbsp; &nbsp; 
+        开课时间: {{course.start_date.year}}.{{course.start_date.month}} - {{course.end_date.year}}.{{course.end_date.month}}&nbsp; &nbsp; 
+         </h4>
+
         <hr>
     </div>
 {% endfor %}

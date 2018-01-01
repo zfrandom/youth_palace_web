@@ -1,24 +1,27 @@
 
 <html>
+   {% load staticfiles %}
     <head>
-        <title>Youth Palace</title>
+        <title>青少宫数据库</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <!-- <link rel="stylesheet" href="{% static 'css/youthpalace.css' %}"> -->
     </head>
     <body>
     <div class="page-header" style="margin-left: 30px">
-        <h1><a href="/">Youth Palace</a></h1>
+        <h1><a href="/">青少宫数据库</a></h1>
         {% if user.is_authenticated %}
-        <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
-        <a href="{% url 'student_list' %}" class ="top_menu">Students</a>
-        <a href="{% url 'teacher_list' %}" class ="top_menu">Teachers</a>
+        <p class="top-menu">欢迎 {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+        <ul class="nav nav-tabs">
+        <li><a href="{% url 'student_list' %}" class ="top_menu">查看学生</a></li>
+        <li><a href="{% url 'teacher_list' %}" class ="top_menu">查看教师</a></li>
 
         {% else %}
             <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
         {% endif %}
 
-        <a href="{% url 'course_list' %}" class ="top_menu">Courses</a>
+        <li><a href="{% url 'course_list' %}" class ="top_menu">查看课程</a></li></ul>
     </div>
     <div class="content container">
         <div class="row">

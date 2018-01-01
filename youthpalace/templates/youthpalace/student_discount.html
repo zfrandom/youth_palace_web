@@ -1,0 +1,21 @@
+{% extends 'youthpalace/base.html' %}
+{% block content %}
+<h1>优惠表</h1>
+ 	<form method ="POST" id="form" class="post-form" >{% csrf_token %}
+ 		{% if course.freeBook %}
+ 			   免书费 <input type="checkbox" name="freebook1" checked="true" ><br>
+ 		{% else %}
+                 免书费 <input type="checkbox" name="freebook2" ><br>
+         {% endif %}
+         {% if course.freeClass %}
+         	免学费 <input type="checkbox" name="freeclass1" checked="true"><br>
+         {% else %}
+                免学费 <input type="checkbox" name="freeclass2"><br>
+         {% endif %}
+                学费打折: <input id="discount" type="number" name="discount" max=10 min=0 value={{course.discount}}> 折
+                <input name="scpk" style="display: none;" value={{course.pk}}>
+                <button id="submit_discount" type="submit" class="save btn btn-default" style="margin-left: 10px;">Save</button>
+            </form>
+ 	{% endblock %}
+
+

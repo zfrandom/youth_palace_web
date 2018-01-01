@@ -1,15 +1,33 @@
 {% extends 'youthpalace/base.html' %}
-<script>
 
-</script>
+
 {% block content %}
+
     <div class="student">
         <h1>{{ student.name }}</h1>
-        <a class="btn btn-default" href="{% url 'student_edit' pk=student.pk %}">Edit Profile<span class="glyphicon glyphicon-pencil"></span></a> 
+        <a class="btn btn-primary" href="{% url 'student_edit' pk=student.pk %}" style=" margin-bottom: 10px;">Edit Profile &nbsp;<span class="glyphicon glyphicon-pencil"></span></a> 
+        <a class="btn btn-danger" style= "margin-bottom:10px" href="{% url 'student_delete' pk=student.pk %}"><span class="glyphicon glyphicon-remove"> </span></a>
+    </div>
+    <div class="basic_info">
+    <br>
+        处于active status：<span>{{student.active}}</span><br>
+        性别：<span>{{student.gender}}</span>
+        生日：<span>{{student.dateOfBirth}}</span>
+        <br>
+        学校：<span>{{student.school}}</span>
+        交通方式：<span>{{student.transportation}}</span>
+        <br>
+        母亲姓名：<span>{{student.mom_name}}</span>
+        母亲电话：<span>{{student.mom_phone_num}}</span>
+        <br>
+        父亲姓名：<span>{{student.dad_name}}</span>
+        父亲电话：<span>{{student.dad_phone_num}}</span>
+        
+
     </div>
     <hr>
-    <p> Courses 
-    <a class="btn btn-default" href="{% url 'student_add_course' pk=student.pk %}">Add Course<span class="glyphicon glyphicon-plus"></span></a> 
+    <p> <h3>Courses </h3>
+    <a class="btn btn-primary" href="{% url 'student_add_course' pk=student.pk %}" >Add Course&nbsp;<span class="glyphicon glyphicon-plus"></span></a> 
 
 
     </p>
@@ -17,21 +35,40 @@
     <tr>
     <th>Class Name</th>
     <th>Tuition</th> 
+    <th>Year</th>
+    <th>Discount</th>
+    <th> </th>
+    <th>Active? </th>
     <th>Delete? </th>
     </tr>
     {% for course in student.course.all %}
-        <tr>
+        <tr >
             <td>{{ course.course.name }}</td>
-            <td>{{ course.course.cost }}</td>
-            <td><a class="btn btn-default" href="{% url 'student_drop_course' pk=course.pk %}"><span class="glyphicon glyphicon-remove"> </span></a> </td>
+            <td>{{ course.cost }}</td>
+            <td>{{course.course.start_date.year}}.{{course.course.start_date.month}} - {{course.course.end_date.year}}.{{course.course.end_date.month}}</td>
+            <td>
+                {% if course.freeBook %}
+                    <span>免书费</span><br>
+                {% endif %}
+                {% if course.freeClass %}
+                    <span>免学费</span>
+                {% endif %}
+                {% if course.discount < 10 %}
+                    <span>学费打{{course.discount}}折</span><br>
+                {% endif %}
+            </td><td>
+            <a id="edit_discount" href="{% url 'student_discount' scpk=course.pk spk=student.pk %}" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></a>
+             </td>
+             <td>{{course.course.active}}</td>
+            <td><a class="btn btn-danger" style= "margin-bottom:10px" href="{% url 'student_drop_course' pk=course.pk %}"><span class="glyphicon glyphicon-remove"> </span></a> </td>
         </tr>
     {% empty %}
         <p>No courses added yet </p>
     {% endfor %}
     </table>
     <hr>
-    <p> Payment History </p>
-    <a class="btn btn-default" href="{% url 'payment_new' pk=student.pk %}"><span class= "glyphicon glyphicon-plus"></span></a></p>
+    <h3> Payment History </h3>
+    <a class="btn btn-primary" href="{% url 'payment_new' pk=student.pk %}"><span class= "glyphicon glyphicon-plus"></span></a></p>
     <br>
     <table style="width:100%">
     <tr>

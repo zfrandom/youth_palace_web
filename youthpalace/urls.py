@@ -18,4 +18,8 @@ urlpatterns = [
     url(r'^student/(?P<pk>\d+)/add_course/$', views.student_add_course, name ='student_add_course'),
     url(r'^teacher/(?P<pk>\d+)/edit/$', views.teacher_edit, name='teacher_edit'),
     url(r'^course/(?P<pk>\d+)/edit/$', views.course_edit, name='course_edit'),
+    url(r'^student/(?P<pk>\d+)/delete/$', views.student_delete, name ='student_delete'),
+    url(r'^course/(?P<pk>\d+)/delete/$', views.course_delete, name ='course_delete'),
+    url(r'^teacher/(?P<pk>\d+)/delete/$', views.teacher_delete, name ='teacher_delete'),
+    url(r'^student/(?P<scpk>\d+)/(?P<spk>\d+)/student_discount/$', views.student_discount, name='student_discount'),
 ]

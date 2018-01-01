@@ -1,11 +1,25 @@
 {% extends 'youthpalace/base.html' %}
 
 {% block content %}
- <a href="{% url 'student_new' %}" class ="top_menu"><span class= "glyphicon glyphicon-plus"></span></a>
+ <p><a href="{% url 'student_new' %}" class ="top_menu">添加学生&nbsp;<span class= "glyphicon glyphicon-plus"></span></a><br>
+ <form class="search" method ="POST">{% csrf_token %}
+  <input type="text" placeholder="Search" name="search" value={{ constraint }}>
+  
+  <button type="submit" class="btn btn-info"><span class= "glyphicon glyphicon-search"></span></button>
+  View All Students 
+{% if all %}
+  <input type="checkbox" name="allstudent1" checked="">
+ {% else %}
+  <input type="checkbox" name="allstudent2" >
+  {%endif %}
+  <button type="submit" class="btn btn-info">Apply</button>
+</form>
 {% for student in students %}
 	 <div class="student">
         <h3><a href="{% url 'student_detail' pk=student.pk %}">{{ student.name }}</a></h1>
         <hr>
     </div>
+    {% empty %}
+    <span>No students found</span>
 {% endfor %}
 {% endblock %}

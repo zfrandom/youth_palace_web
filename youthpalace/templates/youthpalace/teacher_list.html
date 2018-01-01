@@ -1,7 +1,7 @@
 {% extends 'youthpalace/base.html' %}
 
 {% block content %}
- <a href="{% url 'teacher_new' %}" class ="top_menu"><span class= "glyphicon glyphicon-plus"></span></a>
+ <a href="{% url 'teacher_new' %}" class ="top_menu">添加教师&nbsp;<span class= "glyphicon glyphicon-plus"></span></a>
 {% for teacher in teachers %}
 	 <div class="teacher">
         <h3><a href="{% url 'teacher_detail' pk=teacher.pk %}">{{ teacher.name }}</a></h1>   

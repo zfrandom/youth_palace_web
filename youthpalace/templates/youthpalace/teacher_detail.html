@@ -5,6 +5,7 @@
         <h1>{{ teacher.name }}</h1>
         {% if teacher.name != 'No teacher' %}
         <a class="btn btn-default" href="{% url 'teacher_edit' pk=teacher.pk %}">Edit Profile<span class="glyphicon glyphicon-pencil"></span></a> 
+        <a class="btn btn-danger" style= "margin-bottom:10px" href="{% url 'teacher_delete' pk=teacher.pk %}"><span class="glyphicon glyphicon-remove"> </span></a>
         {%endif%}
     </div>
     <hr>
